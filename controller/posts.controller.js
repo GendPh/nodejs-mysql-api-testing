@@ -10,7 +10,7 @@ const postsController = {
         } catch (error) {
             console.log(error)
             res.json({
-                status: "error"
+                status: "Failed to get posts"
             })
         }
     },
