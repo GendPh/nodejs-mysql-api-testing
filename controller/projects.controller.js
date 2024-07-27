@@ -1,5 +1,4 @@
 const pool = require("../database/index")
-
 const projectsController = {
   getAll: async (req, res) => {
     try {
@@ -15,5 +14,4 @@ const projectsController = {
     }
   },
 }
-
 module.exports = projectsController
