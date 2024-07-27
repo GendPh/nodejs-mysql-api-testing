@@ -78,5 +78,5 @@ const projectsController = {
 
 }
 
-module.exports = postsController
+module.exports = projectsController
 
