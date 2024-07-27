@@ -1,5 +1,4 @@
 const pool = require("../database/index")
-
 const postsController = {
     getAll: async (req, res) => {
         try {
@@ -10,7 +9,7 @@ const postsController = {
         } catch (error) {
             console.log(error)
             res.json({
-                status: "Failed to get posts"
+                status: "error"
             })
         }
     },
