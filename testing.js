@@ -19,4 +19,4 @@ const fetchProjects = async () => {
 
 // fetchPosts();
 
-fetchProjects();
+// fetchProjects();
