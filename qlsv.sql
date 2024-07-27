@@ -48,7 +48,7 @@ VALUES
   (1, 'Title 1', 'Content 1'),
   (3, 'Title 3', 'Content 3');
 
--- --------------------------------------------------------
+/* -- --------------------------------------------------------
 --
 -- Table structure for table `projects`
 --
@@ -93,7 +93,7 @@ values
     "https://photos.fife.usercontent.google.com/pw/AP1GczMINMee_hwBs5-fCFIFPVO8T7eooEimBLGsH7GH2hMTLSTVS40Sp_8=w700-h513-s-no-gm?authuser=1",
     "https://photos.fife.usercontent.google.com/pw/AP1GczM9DBZXRgLkozJ_S7Gi9jhdJQ1wyyU8MiFmsRJMIRr269ALMAb7j5E=w700-h513-s-no-gm?authuser=1"
   );
-
+ */
 -- --------------------------------------------------------
 --
 -- Table structure for table `users`
