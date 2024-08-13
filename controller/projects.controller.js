@@ -46,22 +46,35 @@ const projectsController = {
   getPreviousAndNextName: async (req, res) => {
     try {
       const { id } = req.params
-      const [rows, fields] = await pool.query(`SELECT title
-      FROM projects
-      WHERE id = (
-          -- Previous ID
-          CASE 
-              WHEN ? = (SELECT MIN(id) FROM projects) THEN (SELECT MAX(id) FROM projects)  -- If current ID is the first, previous is the last
-              ELSE (SELECT MAX(id) FROM projects WHERE id < ?)
-          END
-      )
-      OR id = (
-          -- Next ID
-          CASE 
-              WHEN ? = (SELECT MAX(id) FROM projects) THEN (SELECT MIN(id) FROM projects)  -- If current ID is the last, next is the first
-              ELSE (SELECT MIN(id) FROM projects WHERE id > ?)
-          END
-      );`, [id, id, id, id])
+      const [rows, fields] = await pool.query(`WITH Ids AS (
+    SELECT
+        CASE
+            WHEN ? = (SELECT MIN(id) FROM projects) THEN (SELECT MAX(id) FROM projects)
+            ELSE (SELECT MAX(id) FROM projects WHERE id < ?)
+        END AS prev_id,
+        CASE
+            WHEN ? = (SELECT MAX(id) FROM projects) THEN (SELECT MIN(id) FROM projects)
+            ELSE (SELECT MIN(id) FROM projects WHERE id > ?)
+        END AS next_id
+),
+OrderedResults AS (
+    SELECT id
+    FROM projects
+    WHERE id IN (
+        SELECT prev_id FROM Ids
+        UNION
+        SELECT next_id FROM Ids
+    )
+)
+SELECT id
+FROM OrderedResults
+ORDER BY
+    CASE
+        WHEN ? = (SELECT MIN(id) FROM projects) THEN id
+        WHEN ? = (SELECT MAX(id) FROM projects) THEN id
+        ELSE NULL
+    END DESC;
+`, [id, id, id, id, id, id])
       res.json({
         data: rows
       })
