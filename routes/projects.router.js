@@ -3,7 +3,8 @@ const router = express.Router()
 
 const projectController = require("../controller/projects.controller")
 
-router.get("/", projectController.getAll)
+router.get("/", projectController.getAll);
+router.get("/:name", postsController.getByName);
 /* router.get("/:id", postsController.getById)
 router.post("/", postsController.create)
 router.put("/:id", postsController.update)
