@@ -28,5 +28,19 @@ const projectsController = {
       })
     }
   },
+  getByName: async (req, res) => {
+    try {
+      const { name } = req.params
+      const [rows, fields] = await pool.query("select * from projects where title = ?", [name])
+      res.json({
+        data: rows
+      })
+    } catch (error) {
+      console.log(error)
+      res.json({
+        status: "Failed to get project " + error
+      })
+    }
+  },
 }
 module.exports = projectsController
