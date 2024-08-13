@@ -53,7 +53,7 @@ const projectsController = {
     try {
       // Query to get the previous and next IDs around the given ID
       const query = `
-        SELECT id, name
+        SELECT title
         FROM projects
         WHERE id = (
             -- Previous ID
