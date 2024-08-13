@@ -13,25 +13,7 @@ const postsController = {
             })
         }
     },
-
-
-    getByName: async (req, res) => {
-        try {
-            const { name } = req.params
-            const [rows, fields] = await pool.query("select * from posts where name = ?", [name])
-            res.json({
-                data: rows
-            })
-        } catch (error) {
-            console.log(error)
-            res.json({
-                status: "error"
-            })
-        }
-    },
-
-
-    getById: async (req, res) => {
+ getById: async (req, res) => {
         try {
             const { id } = req.params
             const [rows, fields] = await pool.query("select * from posts where id = ?", [id])
