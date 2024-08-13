@@ -66,12 +66,13 @@ OrderedResults AS (
         SELECT next_id FROM Ids
     )
 )
-SELECT id
-FROM OrderedResults
+SELECT p.title
+FROM projects p
+JOIN OrderedResults o ON p.id = o.id
 ORDER BY
     CASE
-        WHEN ? = (SELECT MIN(id) FROM projects) THEN id
-        WHEN ? = (SELECT MAX(id) FROM projects) THEN id
+        WHEN ? = (SELECT MIN(id) FROM projects) THEN p.id
+        WHEN ? = (SELECT MAX(id) FROM projects) THEN p.id
         ELSE NULL
     END DESC;
 `, [id, id, id, id, id, id])
